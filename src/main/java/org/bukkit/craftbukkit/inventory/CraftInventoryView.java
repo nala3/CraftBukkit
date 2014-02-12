@@ -127,7 +127,10 @@ public class CraftInventoryView extends InventoryView {
                 type = SlotType.OUTSIDE;
             } else if (inventory.getType() == InventoryType.CRAFTING && slot < 9) {
                 type = SlotType.ARMOR;
-            } else if (slot >= (inventory.countSlots() - 9)) {
+                // Crafting inventories are special because armor slots are not counted
+            } else if (inventory.getType() == InventoryType.CRAFTING && slot >= 36) {
+                type = SlotType.QUICKBAR;
+            } else if (inventory.getType() != InventoryType.CRAFTING && slot >= (inventory.countSlots() - 9)) {
                 type = SlotType.QUICKBAR;
             }
         }
